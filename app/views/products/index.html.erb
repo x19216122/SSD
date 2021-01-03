@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+
+  <div id="productsContainer">
+    
+    <h1>Products</h1>
+
+         <% @products.each do |products| %>
+         <div class="productshols">
+         <h1><%= products.title %></h1>
+        
+         <%= link_to (image_tag products.image_url, :class => "productsholsIm"), products %>
+         <p><%= products.description %></p>
+         <p>Price <%= number_to_currency(products.price, :unit => "€") %>
+         <br>
+         Category: <%= products.category %>
+         <br>
+         Brand: <%= products.brand %></p>
+         
+      <p>
+        <% if session[:login] == 1 %> 
+        <%= link_to 'Show', products,:class => "button", :role => "button"%>
+        <%= link_to 'Edit', edit_product_path(products), :class => "button", :role => "button" %>
+        <%= link_to 'Destroy', products, method: :delete, data: { confirm: 'Are you sure?' }, :class => "button", :role =>"button" %>
+        <%= link_to 'New Product', new_product_path, :class => "button", :role => "button" %>
+        <% end %>
+      </p>
+    
+      <a href="/cart/<%= products.id %>" class="button">Add To Cart</a>
+ </div>
+ <% end %>
+
+</div>
+<br>
